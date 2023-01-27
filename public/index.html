@@ -9,13 +9,31 @@
     <link rel='stylesheet' type='text/css' href='css/styles.css'>
 </head>
 <body>
-    <div class ="container">
-        <div class ="jumbotron text-center">
-            <h2>
-                Flask Application running on GCE
-            </h2>
-            <p>Conventionally, Flask looks for view files in a folder with specific name. For the same reason we need to create a folder with the templates name and add our view files. In the templates folder, create a new file and name it home.html. This file contains the code snippets rendered on the homepage of our application.
-            </p>
+    <div class="container">
+        <div class="jumbotron text-center">
+            <h2>Flask Application running on GCE</h2>
+            <p>Conventionally, Flask looks for view files in a folder with specific name. For the same reason we need to create a folder with the templates name and add our view files. In the templates folder, create a new file and name it home.html. This file contains the code snippets rendered on the homepage of our application.</p>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <form action="/" method="post" enctype="multipart/form-data">
+                    <input type="file" name="image">
+                    <input type="submit" value="Upload">
+                </form>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <h3>Uploaded Images</h3>
+                <div class="uploaded-images">
+                    <!-- loop through the images and display them here -->
+                    <img src="path/to/image1" alt="image1">
+                    <img src="path/to/image2" alt="image2">
+                    <!-- etc. -->
+                </div>
+            </div>
         </div>
     </div>
 </body>
