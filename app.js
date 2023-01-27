@@ -19,18 +19,29 @@ app.use(express.static(path.join(__dirname, 'public')));
 // Sets route to root to index.js
 app.use('/', indexRouter);
 
-// Middleware to make a 404 error
-app.use(function(err,req,res,next)
+// Middleware for handling 404 errors
+app.use(function(req, res, next) 
 {
-    next(createError(404, err));
+    next(createError(404));
 })
 
-// Middleware to handle more errors
-app.use(function(err, req, res,next){
-    console.log(`error ${err.message}`)
-    console.error(err.stack);
+// Middleware for handling validation errors
+app.use(function(err, req, res, next)
+ {
+    if (err.name === 'ValidationError') 
+    {
+    res.status(400).send(err.message);
+    } else {
+    next(err);
+    }
+});
 
+// Middleware for handling server errors
+app.use(function(err, req, res, next)
+ {
     res.status(err.status || 500);
-})
-
-module.exports = app;
+    res.json({
+    message: err.message,
+    error: req.app.get('env') === 'development' ? err : {}
+    });
+});
