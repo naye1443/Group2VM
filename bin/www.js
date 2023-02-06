@@ -6,7 +6,7 @@ const { debug } = require('console');
 
 
 // Normalize a port into a number, string, or false
-const port = normalizePort(process.env.PORT || '3000');
+const port = normalizePort(process.env.PORT || '5000');
 app.set('port', port);
 
 // create server
