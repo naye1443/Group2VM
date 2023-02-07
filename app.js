@@ -2,6 +2,7 @@ const express = require('express');
 const createError = require('http-errors');
 const path = require('path');
 const logger = require('morgan');
+const busboy = require('busboy');   // used for multiform file parsing
 
 const app = express();  // Creates express object
 
@@ -13,7 +14,13 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({extended: false}));
 
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static('public'));
+app.use("/scripts", express.static(path.join(__dirname, 'public/scripts')));
+app.use("/style", express.static(path.join(__dirname, 'public/style')));
+
+// sets up views
+app.set('views', './views');
+app.set('view engine', 'ejs');
 
 
 // Sets route to root to index.js
